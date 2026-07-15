@@ -1,0 +1,24 @@
+{
+  "request_id": "req_1fa6d5f84c464965b8caaed0e2df4939",
+  "created": 1784082015,
+  "background": "opaque",
+  "output_format": "png",
+  "quality": "high",
+  "size": "1024x1024",
+  "usage": {
+    "input_tokens": 159,
+    "output_tokens": 7024,
+    "total_tokens": 7183,
+    "input_tokens_details": {
+      "image_tokens": 0,
+      "text_tokens": 159
+    },
+    "output_tokens_details": {
+      "image_tokens": 7024,
+      "text_tokens": 0
+    }
+  },
+  "paths": [
+    "Resources/Assets/source/app-icon.png"
+  ]
+}

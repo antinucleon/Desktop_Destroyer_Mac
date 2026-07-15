@@ -1,0 +1,24 @@
+{
+  "request_id": "req_97fcaafcdd724f14a7dcfd9f1daea994",
+  "created": 1784082003,
+  "background": "opaque",
+  "output_format": "png",
+  "quality": "high",
+  "size": "2048x2048",
+  "usage": {
+    "input_tokens": 221,
+    "output_tokens": 14272,
+    "total_tokens": 14493,
+    "input_tokens_details": {
+      "image_tokens": 0,
+      "text_tokens": 221
+    },
+    "output_tokens_details": {
+      "image_tokens": 14272,
+      "text_tokens": 0
+    }
+  },
+  "paths": [
+    "Resources/Assets/source/stamp-atlas-chroma.png"
+  ]
+}
