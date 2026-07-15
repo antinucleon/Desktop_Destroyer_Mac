@@ -26,7 +26,7 @@ open "build/Desktop Destroyer.app"
 
 For development, `swift run DesktopDestroyer` also works, though the packaged app provides the correct identity for Screen Recording permission.
 
-On the first desktop capture, macOS may ask for Screen Recording access. The capture is a single static image used only inside the destruction canvas.
+On the first desktop capture, the app opens Privacy & Security → Screen & System Audio Recording when permission is unavailable. If Desktop Destroyer is not listed, click `+` and select `Desktop Destroyer.app`, enable it, then quit and reopen the app. For a durable permission entry, place the app in `/Applications` before adding it; development builds inside `build/` may be replaced during packaging. The capture is a single static image used only inside the destruction canvas.
 
 ## Renderer architecture
 

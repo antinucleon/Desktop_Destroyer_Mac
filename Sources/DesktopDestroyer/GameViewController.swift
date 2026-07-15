@@ -1,4 +1,5 @@
 import AppKit
+import CoreGraphics
 import MetalKit
 import ScreenCaptureKit
 
@@ -77,11 +78,18 @@ final class GameViewController: NSViewController {
             guard let self else { return }
             defer { self.captureButton.isEnabled = true }
             do {
+                try self.ensureScreenCaptureAccess()
                 let image = try await self.captureDisplayImage()
                 try self.metalView.renderer.setBackground(image)
                 self.activityLabel.stringValue = "Desktop captured — all destruction remains inside this app"
+            } catch CaptureError.permissionDenied {
+                self.activityLabel.stringValue = "Screen Recording permission is required to capture the desktop"
+                self.presentScreenCaptureRecovery(restartRequired: false)
+            } catch CaptureError.restartRequired {
+                self.activityLabel.stringValue = "Permission changed — reopen Desktop Destroyer, then capture again"
+                self.presentScreenCaptureRecovery(restartRequired: true)
             } catch {
-                self.activityLabel.stringValue = "Capture unavailable. Allow Screen Recording in System Settings, then try again."
+                self.activityLabel.stringValue = "Desktop capture failed: \(error.localizedDescription)"
             }
             self.refocusCanvas()
         }
@@ -277,6 +285,40 @@ final class GameViewController: NSViewController {
         return try await SCScreenshotManager.captureImage(contentFilter: filter, configuration: configuration)
     }
 
+    private func ensureScreenCaptureAccess() throws {
+        guard !CGPreflightScreenCaptureAccess() else { return }
+
+        activityLabel.stringValue = "macOS is requesting Screen Recording permission…"
+        guard CGRequestScreenCaptureAccess() else {
+            throw CaptureError.permissionDenied
+        }
+        guard CGPreflightScreenCaptureAccess() else {
+            throw CaptureError.restartRequired
+        }
+    }
+
+    private func presentScreenCaptureRecovery(restartRequired: Bool) {
+        let alert = NSAlert()
+        alert.alertStyle = .informational
+        alert.messageText = restartRequired
+            ? "Reopen Desktop Destroyer"
+            : "Allow Screen Recording"
+        alert.informativeText = restartRequired
+            ? "macOS has changed the permission. Quit and reopen Desktop Destroyer, then press Capture Desktop again."
+            : "Open Privacy & Security → Screen & System Audio Recording. If Desktop Destroyer is missing, click + and select Desktop Destroyer.app. Enable it, then quit and reopen the app. The captured image stays inside Desktop Destroyer."
+        alert.addButton(withTitle: restartRequired ? "Quit Desktop Destroyer" : "Open System Settings")
+        alert.addButton(withTitle: "Not Now")
+
+        guard alert.runModal() == .alertFirstButtonReturn else { return }
+        if restartRequired {
+            NSApplication.shared.terminate(nil)
+        } else if let settingsURL = URL(
+            string: "x-apple.systempreferences:com.apple.preference.security?Privacy_ScreenCapture"
+        ) {
+            NSWorkspace.shared.open(settingsURL)
+        }
+    }
+
     @objc private func toolClicked(_ sender: ToolButton) {
         selectTool(sender.tool)
     }
@@ -292,6 +334,8 @@ final class GameViewController: NSViewController {
 
 private enum CaptureError: Error {
     case noDisplay
+    case permissionDenied
+    case restartRequired
 }
 
 final class ToolButton: NSButton {
