@@ -1,0 +1,24 @@
+{
+  "request_id": "req_21afd006d5e44bd7a98b6fd9ba8779bb",
+  "created": 1784088385,
+  "background": "opaque",
+  "output_format": "png",
+  "quality": "high",
+  "size": "1024x1024",
+  "usage": {
+    "input_tokens": 261,
+    "output_tokens": 7024,
+    "total_tokens": 7285,
+    "input_tokens_details": {
+      "image_tokens": 0,
+      "text_tokens": 261
+    },
+    "output_tokens_details": {
+      "image_tokens": 7024,
+      "text_tokens": 0
+    }
+  },
+  "paths": [
+    "/Users/bingxu/Documents/Desktop Destroyer/Resources/Assets/source/cursor-termite-v2-chroma.png"
+  ]
+}

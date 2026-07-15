@@ -1,0 +1,24 @@
+{
+  "request_id": "req_42dad6c00ad74edca62a69791965fd65",
+  "created": 1784088249,
+  "background": "opaque",
+  "output_format": "png",
+  "quality": "high",
+  "size": "1024x1024",
+  "usage": {
+    "input_tokens": 245,
+    "output_tokens": 7024,
+    "total_tokens": 7269,
+    "input_tokens_details": {
+      "image_tokens": 0,
+      "text_tokens": 245
+    },
+    "output_tokens_details": {
+      "image_tokens": 7024,
+      "text_tokens": 0
+    }
+  },
+  "paths": [
+    "/Users/bingxu/Documents/Desktop Destroyer/Resources/Assets/source/cursor-paint-v2-chroma.png"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "request_id": "req_42fba747bf734deabf7481a322cb4cb9",
+  "created": 1784081769,
+  "background": "opaque",
+  "output_format": "png",
+  "quality": "high",
+  "size": "2048x2048",
+  "usage": {
+    "input_tokens": 212,
+    "output_tokens": 14272,
+    "total_tokens": 14484,
+    "input_tokens_details": {
+      "image_tokens": 0,
+      "text_tokens": 212
+    },
+    "output_tokens_details": {
+      "image_tokens": 14272,
+      "text_tokens": 0
+    }
+  },
+  "paths": [
+    "Resources/Assets/source/particle-atlas-chroma.png"
+  ]
+}
